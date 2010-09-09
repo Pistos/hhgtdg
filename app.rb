@@ -16,7 +16,7 @@ Ramaze.options.roots = [ __DIR__ ]
 
 require 'config'
 
-PlanetInfo = Struct.new( :name, :society, :population, :tax_rate, :tariff_rate )
+PlanetInfo = Struct.new( :name, :society, :population, :tax_rate, :tariff_rate, :page )
 
 # Initialize controllers and models
 # require __DIR__( 'model/init' )

@@ -35,7 +35,7 @@ module ApplicationName; module Controllers
         doc.search( 'tr.fleetrow' ).each do |tr|
           tds = tr.search( 'td' )
           td_text = tds[4..8].map { |td| td.content }
-          @planets << PlanetInfo.new( *td_text )
+          @planets << PlanetInfo.new( *td_text, page )
         end
       end
 

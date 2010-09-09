@@ -11,12 +11,14 @@
 <th>Name</th>
 <th>Society</th>
 <th>Population</th>
+<th>Page</th>
 </thead>
 <?r @planets.each do |p| ?>
 <tr>
   <td>#{p.name}</td>
   <td>#{p.society}</td>
   <td>#{p.population}</td>
+  <td>#{p.page}</td>
 </tr>
 <?r end ?>
 </table>
