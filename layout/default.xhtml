@@ -28,14 +28,6 @@
 
       <div id="main-menu">
         #{ a 'Home', ApplicationName::Controllers::Main.r( :/ ) }
-        #{ a 'About', ApplicationName::Controllers::Main.r( :about ) }
-        <?r if logged_in? ?>
-          Logged in as #{user}
-          #{ a 'Logout', ApplicationName::Controllers::Main.r( :logout ) }
-        <?r else ?>
-          #{ a 'Register', ApplicationName::Controllers::Main.r( :register ) }
-          #{ a 'Login', ApplicationName::Controllers::Main.r( :login ) }
-        <?r end ?>
       </div>
 
       #{flashbox}
@@ -51,7 +43,6 @@
     <div id="footer">
       Powered by:
       <a href="http://ramaze.net">Ramaze</a>,
-      <a href="http://purepistos.net/m4dbi">M4DBI</a>,
       <a href="http://jquery.com">jQuery</a>
     </div>
 

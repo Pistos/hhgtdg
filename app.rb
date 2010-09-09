@@ -15,7 +15,7 @@ Ramaze.options.roots = [ __DIR__ ]
 require 'config'
 
 # Initialize controllers and models
-require __DIR__( 'model/init' )
+# require __DIR__( 'model/init' )
 require __DIR__( 'controller/init' )
 
 File.open( 'ramaze.pid', 'w' ) do |f|
