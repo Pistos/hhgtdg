@@ -1,11 +1,12 @@
 <form method="POST">
   Game sessionid: <input type="text" name="sessionid" value="#{@sid}" size="32"/>
-  <input type="submit"/>
+  <input type="submit" name="submit" value="Set sessionid"/><br/>
+  <input type="submit" name="submit" value="Update Cache"/>
 </form>
 
 <h2>Planets</h2>
 
-<table class="sortable">
+<table class="tablesorter">
 <thead>
 <th>Name</th>
 <th>Society</th>

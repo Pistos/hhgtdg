@@ -8,13 +8,20 @@ module ApplicationName; module Controllers
     def index
       @planets = []
 
+      update_cache = ( request[ 'submit' ] == 'Update Cache' )
       if request.post?
         session[ 'sessionid' ] = h( request[ 'sessionid' ] )
+        update_cache = true
       end
 
       return  if session['sessionid'].nil?
 
       @sid = session['sessionid']
+
+      if ! update_cache
+        @planets = session[ 'planets' ] || []
+        return
+      end
 
       (1..14).each do |page|
         doc = Nokogiri::HTML(
@@ -27,9 +34,12 @@ module ApplicationName; module Controllers
         )
         doc.search( 'tr.fleetrow' ).each do |tr|
           tds = tr.search( 'td' )
-          @planets << PlanetInfo.new( *tds[4..8] )
+          td_text = tds[4..8].map { |td| td.content }
+          @planets << PlanetInfo.new( *td_text )
         end
       end
+
+      session[ 'planets' ] = @planets
     end
 
   end
