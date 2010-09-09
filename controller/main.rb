@@ -7,12 +7,21 @@ module ApplicationName; module Controllers
 
     def index
       @planets = []
+
+      if request.post?
+        session[ 'sessionid' ] = h( request[ 'sessionid' ] )
+      end
+
+      return  if session['sessionid'].nil?
+
+      @sid = session['sessionid']
+
       (1..14).each do |page|
         doc = Nokogiri::HTML(
           JSON.parse(
             open(
               "http://davesgalaxy.com/planets/list/all/#{page}/",
-              "Cookie" => 'sessionid=e21fa8c408a1fe989da91c5c99b9f021'
+              "Cookie" => "sessionid=#{@sid}"
             ).read
           )[ 'tab' ]
         )
