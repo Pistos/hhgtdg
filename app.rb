@@ -8,11 +8,15 @@ require 'ramaze'
 require 'digest/sha1'
 require 'cgi'
 require 'json'
+require 'open-uri'
+require 'nokogiri'
 
 # Make sure that Ramaze knows where you are
 Ramaze.options.roots = [ __DIR__ ]
 
 require 'config'
+
+PlanetInfo = Struct.new( :name, :society, :population, :tax_rate, :tariff_rate )
 
 # Initialize controllers and models
 # require __DIR__( 'model/init' )
