@@ -23,7 +23,7 @@ module ApplicationName; module Controllers
         return
       end
 
-      (1..14).each do |page|
+      (1..16).each do |page|
         doc = Nokogiri::HTML(
           JSON.parse(
             open(
@@ -35,7 +35,28 @@ module ApplicationName; module Controllers
         doc.search( 'tr.fleetrow' ).each do |tr|
           tds = tr.search( 'td' )
           td_text = tds[4..8].map { |td| td.content }
-          @planets << PlanetInfo.new( *td_text, page )
+
+          planet_id = tds[0].at('img')['id'][ /planetinfo(\d+)/, 1 ].to_i
+          info_text = []
+          pdoc = Nokogiri::HTML(
+            JSON.parse(
+              open(
+                "http://davesgalaxy.com/planets/#{planet_id}/info/",
+                "Cookie" => "sessionid=#{@sid}"
+              ).read
+            )[ 'tab' ]
+          )
+          table = pdoc.at( "//h3[contains(.,'Resources')]" ).parent.at( 'table' )
+          info_tds = table.search( 'td.planetinfo2' )
+          info_text << info_tds[0].content
+          info_text << info_tds[3].content
+          info_text << info_tds[6].content
+          info_text << info_tds[9].content
+          info_text << info_tds[12].content
+          info_text << info_tds[15].content
+          info_text << info_tds[18].content
+
+          @planets << PlanetInfo.new( *td_text, *info_text, page )
         end
       end
 
